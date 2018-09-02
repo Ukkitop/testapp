@@ -12,8 +12,12 @@
 /tmp/*
 !/log/.keep
 !/tmp/.keep
-
+config/secrets.yml
+config/database.yml
+public
 /node_modules
 /yarn-error.log
-
+.idea
 .byebug_history
+.idea/TestApp.iml
+.idea/TestApp.iml
