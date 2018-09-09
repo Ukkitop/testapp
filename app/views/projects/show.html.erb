@@ -1,24 +1,31 @@
 <div class="container-fluid">
 <div class="row">
-<div class="col-2">
+<div class="col-1">
   <strong>Name:</strong>
   <%= @project.name %>
 </div>
 
-<div class="col-5 Summary">
+<div class="col-4 Summary">
   <strong>Summary:</strong>
 
   <%= @project.summary %>
 
 </div>
-
-<div class="col-2">
+  <div class="col-1">
+    <strong>Tasks:</strong>
+    <%  Task.where(:project_id => @project.id).each do |task| %>
+    <div class="row"><div class="col-12">
+      <%= task.title %>
+    </div></div>
+        <% end %>
+  </div>
+<div class="col-1">
   <strong>Start date:</strong>
 
   <%= @project.start_date %>
 
 </div>
-  <div class="col-2">
+  <div class="col-1">
   <strong>End date:</strong>
   <%= @project.end_date %>
   </div>
