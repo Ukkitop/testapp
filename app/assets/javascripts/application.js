@@ -12,6 +12,16 @@
 //
 //= require rails-ujs
 //= require jquery
+//= require bootstrap-sprockets
 //= require popper
 //= require bootstrap
+//= require_tree .
 
+function ShowLoginForm() {
+    var x = document.getElementById("LoginForm");
+    if (x.style.display === "none") {
+        x.style.display = "flex";
+    } else {
+        x.style.display = "none";
+    }
+}

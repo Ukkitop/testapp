@@ -1,3 +1,4 @@
+<div class="container-fluid">
 <%= form_with(model: task, local: true) do |form| %>
   <% if task.errors.any? %>
     <div id="error_explanation">
@@ -10,28 +11,47 @@
       </ul>
     </div>
   <% end %>
-
+<div class="row">
+  <div class="col-12 col-sm-12 col-md-12 col-xl-2 ">Title
   <div class="field">
-    <%= form.label :title %>
-    <%= form.text_field :title, id: :task_title %>
+    <%= form.text_field :title, id: :task_title, :require => true %>
   </div>
-
+  </div>
+  <div class="col-12 col-sm-12 col-xl-5 ">Description
   <div class="field">
-    <%= form.label :description %>
-    <%= form.text_field :description, id: :task_description %>
+    <%= form.text_area :description, :cols =>"100", :rows =>"10", id: :task_description %>
   </div>
-
+  </div>
+  <div class="col-12 col-sm-12 col-xl-1 ">
   <div class="field">
     <%= form.label :status %>
-    <%= form.text_field :status, id: :task_status %>
+    <%= form.select :status, ['new', 'in progress', 'done']%>
   </div>
 
+  Project
     <div class="field">
-      <%= form.label :project_id %>
-      <%= form.text_field :project_id, id: :task_project_id %>
+      <%= collection_radio_buttons(:task, :project_id, @projects, :id, :name) do |b|%>
+          <div class="col-12">
+            <%= b.label(class:"label-radiobutton") { b.radio_button + b.text } %>
+          </div>
+      <% end %>
     </div>
 
-  <div class="actions">
-    <%= form.submit %>
   </div>
+  <div class="col-12 col-sm-12 col-xl-2 ">Users
+    <div class="field">
+      <%= collection_check_boxes(:task, :user_ids, @users, :id, :name_with_initial) do |b| %>
+        <div class="col-12">
+        <%= b.label(class:"label-checkbox") { b.check_box + b.text } %>
+        </div>
+          <% end %>
+    </div>
+  </div>
+  <div class="col-12 col-sm-12 col-xl-1">
+  <div class="actions">
+
+    <%= form.submit "Apply", :class => "btn btn-outline-dark" %>
+  </div>
+  </div>
+</div>
 <% end %>

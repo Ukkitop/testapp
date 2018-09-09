@@ -1,3 +1,4 @@
+<div class="container-fluid">
 <%= form_with(model: project, local: true) do |form| %>
   <% if project.errors.any? %>
     <div id="error_explanation">
@@ -10,17 +11,18 @@
       </ul>
     </div>
   <% end %>
-
+<div class="row">
+  <div class="col-12 col-sm-12 col-md-12 col-xl-2 ">Name
   <div class="field">
-    <%= form.label :name %>
-    <%= form.text_field :name, id: :project_name %>
+    <%= form.text_field :name, id: :project_name, size: "35" %>
   </div>
-
+  </div>
+  <div class="col-12 col-sm-12 col-xl-5 ">Summary
   <div class="field">
-    <%= form.label :summary %>
-    <%= form.text_field :summary, id: :project_summary %>
+    <%= form.text_area :summary, id: :project_summary, :rows =>"10", :cols => "100" %>
   </div>
-
+  </div>
+  <div class="col-12 col-sm-12 col-xl-2 ">
   <div class="field">
     <%= form.label :start_date %>
     <%= form.date_select :start_date, id: :project_start_date %>
@@ -30,8 +32,9 @@
     <%= form.label :end_date %>
     <%= form.date_select :end_date, id: :project_end_date %>
   </div>
-
-  <div class="actions">
-    <%= form.submit %>
   </div>
+  <div class="actions">
+    <%= form.submit "Apply", :class => "btn btn-outline-dark" %>
+  </div>
+</div>
 <% end %>

@@ -1,0 +1,63 @@
+
+<div class="container-fluid text-center">
+
+
+
+<div class="row tableApp">
+  <div class="col-4"><h2><%= link_to "Tasks", tasks_path %> <a href=<%= new_task_path %>> <%= image_tag("/assets/plus.svg",  alt: "like", class: "plus-image") %></a></h2></div>
+  <div class="col-4"><h2><%= link_to "Project", projects_path %> <a href=<%= new_project_path %>> <%= image_tag("/assets/plus.svg",  alt: "like", class: "plus-image") %></a></h2></div>
+  <div class="col-4"><h2>Users</h2></div>
+</div>
+          <% @tasks = Task.all %>
+           <% @tasks.each do |task| %>
+
+              <div class="row tableApp">
+
+                <div class="col-4 TaskCol">
+                  <div class="row ">
+                <div class="col-6"><%= task.title %></div>
+                <div class="col-6"><%= task.status %></div>
+                  </div>
+                </div>
+                <div class="col-4 ProjectCol">
+                <% if task.project_id != nil && Project.exists?(id: task.project_id) then %>
+                <% project = Project.find(task.project_id) %>
+
+                <div class="row ">
+
+                      <div class="col-12"><%= project.name %></div>
+                  </div>
+
+                    <% end %>
+                </div>
+
+                    <% @users = task.users %>
+                <div class="col-4 UserCol">
+                     <%  @users.each do |user| %>
+                        <div class="row ">
+                          <div class="col-6"><%= user.first_name %></div>
+                          <div class="col-6"><%= user.last_name %></div>
+                        </div>
+                      <% end %>
+                </div>
+              </div>
+            <% end %>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

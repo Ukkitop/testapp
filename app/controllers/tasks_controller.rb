@@ -10,20 +10,27 @@ class TasksController < ApplicationController
   # GET /tasks/1
   # GET /tasks/1.json
   def show
+    @users = User.all
   end
 
   # GET /tasks/new
   def new
     @task = Task.new
+    @users = User.all
+    @projects = Project.all
   end
 
   # GET /tasks/1/edit
   def edit
+    @users = User.all
+    @projects = Project.all
   end
 
   # POST /tasks
   # POST /tasks.json
   def create
+    @users = User.all
+    @projects = Project.all
     @task = Task.new(task_params)
 
     respond_to do |format|
@@ -40,6 +47,8 @@ class TasksController < ApplicationController
   # PATCH/PUT /tasks/1
   # PATCH/PUT /tasks/1.json
   def update
+    @projects = Project.all
+    @users = User.all
     respond_to do |format|
       if @task.update(task_params)
         format.html { redirect_to @task, notice: 'Task was successfully updated.' }
@@ -54,11 +63,7 @@ class TasksController < ApplicationController
   # DELETE /tasks/1
   # DELETE /tasks/1.json
   def destroy
-    @users = User.where("task_id = ?", @task.id)
-    @users.each do |user|
-      user.task_id = nil
-      user.save
-    end
+
     @task.destroy
     respond_to do |format|
       format.html { redirect_to tasks_url, notice: 'Task was successfully destroyed.' }
@@ -74,6 +79,6 @@ class TasksController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def task_params
-      params.require(:task).permit(:title, :description, :status, :project_id)
+      params.require(:task).permit(:title, :description, :status, :project_id, :user_ids => [])
     end
 end

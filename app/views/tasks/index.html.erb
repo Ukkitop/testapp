@@ -2,14 +2,14 @@
 
 <h1>Tasks</h1>
 
-<table>
+<table class="table">
   <thead>
     <tr>
       <th>Title</th>
-      <th>Description</th>
       <th>Status</th>
-      <th>project №</th>
-      <th colspan="3"></th>
+      <th>project</th>
+      <th>Users</th>
+      <th colspan="4"></th>
     </tr>
   </thead>
 
@@ -17,9 +17,13 @@
     <% @tasks.each do |task| %>
       <tr>
         <td><%= task.title %></td>
-        <td><%= task.description %></td>
         <td><%= task.status %></td>
-        <td><%= task.project_id %></td>
+        <% if task.project_id != nil && Project.exists?(id: task.project_id) then %>
+        <td><%= Project.find(task.project_id).name %></td>
+            <% else %>
+            <td></td>
+            <% end %>
+        <td><%= task.users.map {|c| c.first_name+" "+c.last_name}.join('| ') %></td>
         <td><%= link_to 'Show', task %></td>
         <td><%= link_to 'Edit', edit_task_path(task) %></td>
         <td><%= link_to 'Destroy', task, method: :delete, data: { confirm: 'Are you sure?' } %></td>

@@ -8,6 +8,9 @@ class User < ApplicationRecord
   validates :last_name, presence: true
   validates :email, uniqueness: true
   validates :email, presence:  true
-  validates_with TaskExistValidator, fields: :task_id
-  belongs_to :task, optional: true
+#  validates_with TaskExistValidator, fields: :task_id
+  has_and_belongs_to_many :tasks
+  def name_with_initial
+    "#{first_name.first}. #{last_name}"
+  end
 end

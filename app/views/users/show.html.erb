@@ -1,24 +1,27 @@
+<div class="container-fluid">
+  <div class="row">
 
-
-<p>
+    <div class="col-2">
   <strong>First name:</strong>
   <%= @user.first_name %>
-</p>
+    </div>
 
-<p>
+      <div class="col-2">
   <strong>Last name:</strong>
   <%= @user.last_name %>
-</p>
+      </div>
 
-<p>
+        <div class="col-2">
   <strong>Email:</strong>
   <%= @user.email %>
-</p>
+        </div>
+    <div class="col-2">
+      <strong>Tasks:</strong>
+      <%= @user.tasks.map {|c| c.title}.join(', ') %>
+    </div>
 
-<p>
-  <strong>Task:</strong>
-  <%= @user.task_id %>
-</p>
 
 <%= link_to 'Edit', edit_user_path(@user) %> |
 <%= link_to 'Back', users_path %>
+  </div>
+</div>

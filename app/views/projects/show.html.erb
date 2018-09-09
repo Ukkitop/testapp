@@ -1,24 +1,29 @@
-
-
-<p>
+<div class="container-fluid">
+<div class="row">
+<div class="col-2">
   <strong>Name:</strong>
   <%= @project.name %>
-</p>
+</div>
 
-<p>
+<div class="col-5 Summary">
   <strong>Summary:</strong>
+
   <%= @project.summary %>
-</p>
 
-<p>
+</div>
+
+<div class="col-2">
   <strong>Start date:</strong>
-  <%= @project.start_date %>
-</p>
 
-<p>
+  <%= @project.start_date %>
+
+</div>
+  <div class="col-2">
   <strong>End date:</strong>
   <%= @project.end_date %>
-</p>
+  </div>
 
 <%= link_to 'Edit', edit_project_path(@project) %> |
 <%= link_to 'Back', projects_path %>
+</div>
+</div>

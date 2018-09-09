@@ -4,7 +4,7 @@
     <title>TestApp</title>
     <%= csrf_meta_tags %>
     <%= javascript_include_tag 'application.js' %>
-    <%= stylesheet_link_tag 'application.css' %>
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true%>
 
   </head>
 
@@ -16,16 +16,21 @@
       <p class="alert alert-danger"><%= alert %></p>
   <% end %>
 
-  <p class="navbar-text pull-right">
+  <div class="row">
+
     <% if user_signed_in? %>
-        Logged in as <strong><%= current_user.email %></strong>.
-        <%= link_to 'Edit profile', edit_user_registration_path, :class => 'navbar-link' %> |
-        <%= link_to "Logout", destroy_user_session_path, method: :delete, :class => 'navbar-link'  %>
-    <% else %>
-        <%= link_to "Sign up", new_user_registration_path, :class => 'navbar-link'  %> |
-        <%= link_to "Login", new_user_session_path, :class => 'navbar-link'  %>
+      <div class="col-2 currentuser">Welcom back: <strong><%= current_user.first_name+" "+current_user.last_name %></strong></div>
+       <div class="col-1 loginbtns"> <a href=<%= edit_user_registration_path %>><div class="btn btn-outline-dark">Edit profile</div></a></div>
+       <div class="col-1 loginbtns"><%= button_to "Logout", destroy_user_session_path, method: :delete, :class => "btn btn-outline-dark" %></div><% else %>
+        <div class="col-1 loginbtns"><a href=<%= new_user_registration_path %>><div class="btn btn-outline-dark">Sign up</div></a></div>
+        <div class="col-1 loginbtns"> <a href=<%= new_user_session_path %>><div class="btn btn-outline-dark">Login</div></a></div>
+
     <% end %>
-  </p>
-    <%= yield %>
+    <div class="col-1 loginbtns"><%= button_to "Main", root_url, method: :get, :class => "btn btn-outline-dark" %></div>
+    <div class="col-1 loginbtns"><%= button_to "Tasks", tasks_url, method: :get, :class => "btn btn-outline-dark" %></div>
+    <div class="col-1 loginbtns"><%= button_to "Projects", projects_url, method: :get, :class => "btn btn-outline-dark" %></div>
+    <div class="col-1 loginbtns"><%= button_to "Users", users_url, method: :get, :class => "btn btn-outline-dark" %></div>
+  </div>
+  <%= yield %>
   </body>
 </html>
